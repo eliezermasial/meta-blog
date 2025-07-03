@@ -1,7 +1,11 @@
+import HeroImage from '../../components/HeroImage';
+import Lastpost from '../../components/LastPost';
+
 function Home() {
   return (
     <div>
-      <h1>bienvenue</h1>
+      <HeroImage />
+      <Lastpost />
     </div>
   )
 }
