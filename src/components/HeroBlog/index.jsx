@@ -7,7 +7,7 @@ function HeroBlog () {
 
     return (
         <section className="relative capitalize">
-            <div className=" flex flex-col justify-center items-center py-4 my-5 font-['Work_Sans] tracking-normal ">
+            <div className=" flex flex-col justify-center items-center py-4 my-5 font-['Work_Sans]">
                 <h1 className="mb-3 font-semibold leading-5 tex-[30px] ">page titre</h1>
                 <ul className="flex gap-4 font-normal">
                     <li><NavLink to="/" className="text-[#3B3C4A] leading-5 hover:border hover:border-[#3B3C4A] hover:p-1 ">home</NavLink></li>
