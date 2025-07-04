@@ -6,7 +6,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <main className="container mx-auto font-normal leading-6 tracking-normal py-24">
+      <main className="container mx-auto font-normal overflow-x-hidden leading-6 tracking-normal max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-24">
         <Outlet />
       </main>
       <Footer />

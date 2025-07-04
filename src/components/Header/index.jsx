@@ -4,21 +4,21 @@ import logo from '../../assets/Logo1.svg';
 
 function Header () {
     return (
-        <header className=" fixed z-10 w-full bg-white shadow-md">
-            <nav className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 py-6">
+        <header className=" fixed overflow-x-hidden z-10 w-full bg-white shadow-md ">
+            <nav className="container mx-auto flex items-center justify-between gap-4 max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-6">
                 <a href="/">
                     <img src={logo} width={150} height={18} alt="Logo" />
                 </a>
 
-                <ul className="flex flex-wrap justify-center items-center gap-8 text-[#3B3C4A] font-['Work_Sans'] text-base font-normal leading-6 tracking-normal">
+                <ul className=" hidden md:flex flex-wrap justify-center items-center gap-8 text-[#3B3C4A] font-['Work_Sans'] text-base font-normal leading-6 tracking-normal">
                     <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/" className={({ isActive }) => isActive ? "bg-[#F4F4F5] p-1" : ""}>Home</NavLink> </li>
                     <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/blog">Blog</NavLink> </li>
-                    <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/siglePost">Single Post</NavLink> </li>
+                    <li className=" md:hidden lg:block hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/siglePost">Single Post</NavLink> </li>
                     <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/pages">Pages</NavLink> </li>
                     <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/contact">Contact</NavLink> </li>
                 </ul>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 max-sm:hidden">
                     <div className="relative">
                         <input type="text" placeholder="Search"
                             className="bg-[#F4F4F5] outline-none w-[166px] h-[36px] px-3 pr-8 rounded-md text-sm"
@@ -30,6 +30,18 @@ function Header () {
                             <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
                     </div>
+                    <button className="max-md:hidden bg-[#F4F4F5] px-1 w-10 text-start rounded-full font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 bg-white h-4 rounded-full p-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                        </svg>
+                    </button>
+                </div>
+                <div className="max-md:flex hidden items-center gap-4 ">
+                    <button className="border-[2px] bg-[#F4F4F5] border-[#3636389f] hover:border-[#3b83f6a8] p-1 rounded-md transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#363638a4" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                        </svg>
+                    </button>
                     <button className="bg-[#F4F4F5] px-1 w-10 text-start rounded-full font-semibold">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 bg-white h-4 rounded-full p-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />

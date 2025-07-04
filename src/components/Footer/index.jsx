@@ -4,8 +4,8 @@ import imgFooter from '../../assets/Copyright Info.png';
 
 function Footer () {
     return (
-        <footer className="bg-[#F6F6F7] font-['Plus_Jakarta_Sans'] tracking-normal">
-            <div className="container mx-auto px-4 py-8 text-[#181A2A] space-y-8">
+        <footer className="bg-[#F6F6F7] overflow-x-hidden font-['Plus_Jakarta_Sans'] tracking-normal">
+            <div className="container mx-auto max-md:px-4 md:px-4 lg:px-4 xl:px-4  py-8 text-[#181A2A] space-y-8">
                 <div className="flex flex-col md:flex-row justify-between gap-8">
                     <div className="max-w-sm">
                         <h3 className="font-semibold mb-2 text-lg">About</h3>
@@ -63,11 +63,11 @@ function Footer () {
 
                 <hr className="border-gray-300" />
 
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+                <div className="flex  justify-between items-center gap-4 text-sm">
                     <div>
-                        <img src={imgFooter} alt="Footer logo" className="" />
+                        <img src={imgFooter} alt="Footer logo" className="w-32 sm:w-40 md:w-52 lg:w-80" />
                     </div>
-                    <ul className="flex flex-wrap gap-4 text-[#3B3C4A]">
+                    <ul className="flex max-md:gap-2 gap-4 text-[#3B3C4A]">
                         <li><a href="#">Terms of Use</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Cookie Policy</a></li>
