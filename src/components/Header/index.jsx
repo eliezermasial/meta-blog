@@ -1,11 +1,14 @@
-import { Form, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from '../../assets/Logo1.svg';
-
+import { useContext } from "react";
+import { ThemeContext }  from "../../utils/Context/ThemeContext";
 
 function Header () {
+    const { toggleTheme, theme } = useContext(ThemeContext);
+
     return (
         <header className=" fixed overflow-x-hidden z-10 w-full bg-white shadow-md ">
-            <nav className="container mx-auto flex items-center justify-between gap-4 max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-6">
+           <nav className="container mx-auto flex items-center justify-between gap-4 max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-6">
                 <a href="/">
                     <img src={logo} width={150} height={18} alt="Logo" />
                 </a>
@@ -30,7 +33,7 @@ function Header () {
                             <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
                     </div>
-                    <button className="max-md:hidden bg-[#F4F4F5] px-1 w-10 text-start rounded-full font-semibold">
+                    <button onClick={()=> toggleTheme()} className={`max-md:hidden px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'bg-red-500  justify-end ' : 'bg-[#F4F4F5] justify-start'} `}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 bg-white h-4 rounded-full p-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                         </svg>
