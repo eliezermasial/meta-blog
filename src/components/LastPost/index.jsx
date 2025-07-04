@@ -1,23 +1,26 @@
 import { Link, useLocation } from 'react-router-dom';
 import smallImg from '../../assets/SmallImg.png';
 import imgTry from '../../assets/Rectangle 38.png';
+import { useContext } from 'react';
+import { ThemeContext } from '../../utils/Context/ThemeContext';
 
 
 function Lastpost () {
 
     const location = useLocation();
+    const { theme } = useContext(ThemeContext);
 
     return (
-        <section className="mt-20 py-4 text-[#181A2A]">
+        <section className={`mt-20 py-4 ${theme === 'dark' ? 'text-white' : 'text-[#181A2A]'}`}>
 
             { location.pathname==='/' && (
-                <h2 className="font-['Work_Sans'] font-bold text-2xl leading-6 mb-6">Last Post</h2>
+                <h2 className={`font-['Work_Sans'] font-bold text-2xl leading-6 mb-6`}>Last Post</h2>
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(9)].map((_, i) => (
                 <Link key={i} to={`/singlepost/${i}`}>
-                    <div  className="flex flex-col gap-4 max-w-full p-4 border border-[#E8E8EA] rounded-md bg-white">
+                    <div  className={`flex flex-col gap-4 max-w-full p-4 ${theme === 'dark' ? 'bg-[#181A2A] border-[#242535] ' : 'bg-white border-[#E8E8EA]'} border rounded-md`}>
                         <div>
                             <img src={imgTry} className="w-full" alt="try image" />
                         </div>
@@ -25,7 +28,7 @@ function Lastpost () {
                             <button className="mb-2 text-sm font-['Work_Sans'] text-[#4B6BFB] font-medium bg-[#4B6BFB0D] px-3 py-1 rounded">
                                 Technologie
                             </button>
-                            <p className="mb-4 font-['Work_Sans'] font-semibold text-xl">
+                            <p className={`mb-4 font-['Work_Sans'] ${theme === 'dark' ? 'text-white' : 'text-[#181A2A]'} font-semibold text-xl`}>
                                 The Impact of Technology on the Workplace: How Technology is Changing
                             </p>
                             <div className="flex items-center text-[#97989F] gap-2">
