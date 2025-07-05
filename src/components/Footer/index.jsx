@@ -1,15 +1,19 @@
-import { Link } from "react-router-dom";
-import logoLightFooter from '../../assets/Copyright Info.png';
-import logoDarkFooter from '../../assets/logoFooterDark.png';
 import { useContext } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+import { Link } from "react-router-dom";
+import logoDarkFooter from '../../assets/logoFooterDark.png';
+import logoLightFooter from '../../assets/Copyright Info.png';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
+
 
 function Footer () {
 
     const { theme } = useContext(ThemeContext);
 
     return (
-        <footer className={`overflow-x-hidden ${theme === 'dark' ? 'bg-[#141624]' : 'bg-[#F6F6F7]'} font-['Plus_Jakarta_Sans'] tracking-normal`}>
+        <motion.footer initial={false} animate={{backgroundColor: theme === 'dark' ? '#141624' : '#F6F6F7',}} transition={{ type: 'spring', stiffness: 400, damping: 30,}}
+         className={`overflow-x-hidden transition-all duration-200 font-['Plus_Jakarta_Sans'] tracking-normal`}>
             <div className="container mx-auto max-md:px-4 md:px-4 lg:px-4 xl:px-4  py-8 text-[#181A2A] space-y-8">
                 <div className="flex flex-col md:flex-row justify-between gap-8">
                     <div className={`max-w-sm ${theme === 'dark' ? 'text-[#97989F]' : 'text-[#3B3C4A]'}`}>
@@ -44,7 +48,8 @@ function Footer () {
                             </ul>
                         </div>
                     </div>
-                    <div className={`max-w-md ${theme === 'dark' ? 'bg-[#242535] border  border-[#242535] ' : 'bg-white border '} rounded-sm p-5 shadow space-y-4`}>
+                    <motion.div initial={false} animate={{backgroundColor: theme === 'dark' ? '#242535' : '#FFFF',}} transition={{ type: 'spring', stiffness: 400, damping: 30,}}
+                    className={`max-w-md border transition-all duration-200 ${theme === 'dark' ? ' border-[#242535] ' : ''} rounded-sm p-5 shadow space-y-4`}>
                         <div className="text-center">
                             <h3 className={`font-semibold ${theme === 'dark' ? 'text-white':'text-[#181A2A]'} mb-2 text-lg`}>Weekly Newsletter</h3>
                             <span className="text-sm text-[#696A75]">Get blog articles and offers via email</span>
@@ -54,17 +59,19 @@ function Footer () {
                                 <input type="email" placeholder="Your email"
                                     className={`w-full border ${theme === 'dark' ? 'bg-[#141624]' : 'bg-[#F6F6F7]'} border-gray-300 rounded px-5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                 />
-                                <svg className={`absolute w-6 h-6 right-3 ${theme === 'dark' ? 'text-[#696A75]' : 'text-[#181a2a9c]'} top-1/2 -translate-y-1/2 pointer-events-none p-1 rounded`}
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z" />
-                                </svg>
-
+                                <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} className={`absolute w-6 h-6 right-3 top-1 -translate-y-1/2 pointer-events-none p-1 rounded ${theme === 'dark' ? 'text-[#696A75]' : 'text-[#181a2a9c]'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5
+                                            1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
+                                        />
+                                    </svg>
+                                </motion.div>
                             </div>
-                            <button className="mt-3 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                            <motion.button whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="mt-3 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
                                 Subscribe
-                            </button>
+                            </motion.button>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
                 <hr className="border-gray-300" />
@@ -80,7 +87,7 @@ function Footer () {
                     </ul>
                 </div>
             </div>
-        </footer>             
+        </motion.footer>             
     )
 }
 

@@ -1,18 +1,24 @@
+import { useContext } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import { NavLink } from "react-router-dom";
 import imgHeroBlog from "../../assets/Image.png";
 import smallImg from "../../assets/SmallImg.png";
+import { ThemeContext } from "../../utils/Context/ThemeContext";
 
 
 function HeroBlog () {
 
+    const { theme } = useContext(ThemeContext);
+
     return (
         <section className="relative capitalize">
             <div className=" flex flex-col justify-center items-center py-4 my-5 font-['Work_Sans]">
-                <h1 className="mb-3 font-semibold leading-5 tex-[30px] ">page titre</h1>
+                <h1 className={`mb-3 font-semibold leading-5 tex-[30px] ${theme === 'dark' ? 'text-white':'text-#141624'} `} >page titre</h1>
                 <ul className="flex gap-4 font-normal">
-                    <li><NavLink to="/" className="text-[#3B3C4A] leading-5 hover:border hover:border-[#3B3C4A] hover:p-1 ">home</NavLink></li>
-                    <small>|</small>
-                    <li><NavLink to="/blog" className={({isActive}) => isActive ? "text-[#696A75] tex-[16px]" : "" }>Blog</NavLink></li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}><NavLink to="/" className="text-[#3B3C4A] leading-5 hover:border hover:border-[#3B3C4A] hover:text-white hover:p-1">home</NavLink></motion.li>
+                    <small className="text-[#696A75]">|</small>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}><NavLink to="/blog" className={`hover:border hover:border-[#3B3C4A] hover:p-1 ${({isActive}) => isActive ? "text-[#696A75] tex-[16px]" : ""}`}>Blog</NavLink></motion.li>
                 </ul>
             </div>
             <div>

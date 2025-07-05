@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import imghero from '../../assets/image.png';
 import smallImg from '../../assets/smallImg.png';
-import { useContext } from 'react';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
+
 
 function HeroImage () {
 
@@ -12,9 +15,9 @@ function HeroImage () {
             <div className={`absolute -bottom-8 md:-bottom-12 left-1/2 md:left-[40%] lg:left-[30%] xl:left-[25%] ${theme === 'dark' ? 'bg-[#181A2A] border-[#242535] text-white ' : 'bg-white border-[#E8E8EA] text-[#181A2A]'}
                 transform -translate-x-1/2 border rounded-md px-4 py-6 shadow-lg w-[90%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[32rem]`}
             >
-                <button className="mb-2 text-sm font-['Work_Sans'] text-white font-medium bg-[#4B6BFB] px-3 py-1 rounded">
+                <motion.button whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="mb-2 text-sm font-['Work_Sans'] text-white font-medium bg-[#4B6BFB] px-3 py-1 rounded">
                     Technologie
-                </button>
+                </motion.button>
                 <p className="mb-4 font-['Work_Sans'] font-semibold text-base sm:text-lg md:text-xl">The Impact of Technology on the Workplace: How Technology is Changing</p>
                 <div className="flex items-center text-[#97989F] gap-2 flex-wrap">
                     <img src={smallImg} alt="petit image" className="w-8 h-8 rounded-full" />

@@ -1,4 +1,6 @@
 import { useContext } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import logo from '../../assets/Logo1.svg';
 import { NavLink } from "react-router-dom";
 import logoDark from '../../assets/logoDark.png';
@@ -11,17 +13,19 @@ function Header () {
 
     return (
 
-        <header className={`fixed overflow-x-hidden z-10 w-full  shadow-md ${theme === 'dark' ? 'bg-[#242535]' : 'bg-white'} `}>
+        <motion.header initial={false} animate={{backgroundColor: theme === 'dark' ? '#242535' : '#FFFF',}} transition={{ type: 'spring', stiffness: 400, damping: 30,}}
+            className={`fixed overflow-x-hidden z-10 w-full  shadow-md transition-all duration-200 `}
+        >
            <nav className="container mx-auto flex items-center justify-between gap-4 max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-6">
                 <a href="/">
                     <img src={(theme === 'dark' ? logoDark : logo)} width={150} height={18} alt="Logo" />
                 </a>
                 <ul className={`hidden md:flex flex-wrap justify-center items-center gap-8 ${theme === 'dark' ? 'text-[#FFFFFF]':'text-[#3B3C4A]'} font-['Work_Sans'] text-base font-normal leading-6 tracking-normal`}>
-                    <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Home</NavLink> </li>
-                    <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/blog">Blog</NavLink> </li>
-                    <li className=" md:hidden lg:block hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/siglePost">Single Post</NavLink> </li>
-                    <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/pages">Pages</NavLink> </li>
-                    <li className=" hover:p-1 hover:bg-[#F4F4F5] hover:rounded-md "> <NavLink to="/contact">Contact</NavLink> </li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className="  "> <NavLink to="/" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Home</NavLink> </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/blog">Blog</NavLink> </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/siglePost">Single Post</NavLink> </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/pages">Pages</NavLink> </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/contact">Contact</NavLink> </motion.li>
                 </ul>
                 <div className="flex items-center gap-4 max-sm:hidden">
                     <div className="relative">
@@ -35,26 +39,36 @@ function Header () {
                             <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
                     </div>
-                    <button onClick={()=> toggleTheme()} className={`max-md:hidden px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'bg-[#4B6BFB] justify-end ' : 'bg-[#F4F4F5] justify-start'} `}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 bg-white h-4 rounded-full p-1">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                        </svg>
-                    </button>
+                    <motion.button onClick={()=> toggleTheme()} initial={false} animate={{backgroundColor: theme === 'dark' ? '#4B6BFB' : '#F4F4F5',}} transition={{ type: 'spring', stiffness: 400, damping: 20,}}
+                        className={`max-md:hidden items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
+                    >
+                        <motion.div layout transition={{ type: "spring", stiffness: 200, damping: 30, }} >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 bg-white h-4 rounded-full p-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                            </svg>
+                        </motion.div>
+                    </motion.button>
                 </div>
+
                 <div className="max-md:flex hidden items-center gap-4 ">
-                    <button className="border-[2px] bg-[#F4F4F5] border-[#3636389f] hover:border-[#3b83f6a8] p-1 rounded-md transition-colors">
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="border-[2px] bg-[#F4F4F5] border-[#3636389f] hover:border-[#3b83f6a8] p-1 rounded-md transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#363638a4" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
                         </svg>
-                    </button>
-                    <button onClick={()=> toggleTheme()} className={`px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'bg-[#4B6BFB] justify-end ' : 'bg-[#F4F4F5] justify-start'} `}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 bg-white h-4 rounded-full p-1">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                        </svg>
-                    </button>
+                    </motion.button>
+
+                    <motion.button onClick={()=> toggleTheme()} initial={false} animate={{backgroundColor: theme === 'dark' ? '#4B6BFB' : '#F4F4F5',}} transition={{ type: 'spring', stiffness: 400, damping: 20,}}
+                        className={`items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
+                    >
+                        <motion.div layout transition={{ type: "spring", stiffness: 200, damping: 30, }} >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 bg-white h-4 rounded-full p-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                            </svg>
+                        </motion.div>
+                    </motion.button>
                 </div>
             </nav>
-        </header>
+        </motion.header>
     )
 }
 
