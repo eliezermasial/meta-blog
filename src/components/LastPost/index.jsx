@@ -46,7 +46,7 @@ function Lastpost ({data}) {
                                 </div>
                                 <div className="flex items-center text-[#97989F] gap-2 mt-auto">
                                     <img src={smallImg} alt="petit image" className="w-8 h-8 rounded-full" />
-                                    <span className="text-sm font-['Work_Sans'] leading-5">Jason Francisco</span>
+                                    <span className="text-sm font-['Work_Sans'] leading-5">{post.authorName || "Auteur inconnu"}</span>
                                     <span className="text-sm font-['Work_Sans'] leading-5">August 20, 2022</span>
                                 </div>
                             </motion.div>
