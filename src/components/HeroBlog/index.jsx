@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { motion } from 'framer-motion';
 import { NavLink } from "react-router-dom";
 import imgHeroBlog from "../../assets/Image.png?url";
-import smallImg from "../../assets/smallImg.png?url";
+import smallImg from "../../assets/small.png?url";
 import { ThemeContext } from "../../utils/Context/ThemeContext";
 
 

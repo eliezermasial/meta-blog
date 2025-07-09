@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import smallImg from '../../assets/SmallImg.png';
-import imgTry from '../../assets/Rectangle 38.png';
+import smallImg from '../../assets/small.png?url';
+import imgTry from '../../assets/rectangle.png?url';
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 

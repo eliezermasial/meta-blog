@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import smallImg from '../../assets/SmallImg.png';
-import imgPost from '../../assets/Rectangle 38.png';
+import smallImg from '../../assets/small.png?url';
+import imgPost from '../../assets/rectangle.png?url';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 
 

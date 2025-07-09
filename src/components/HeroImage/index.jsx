@@ -2,7 +2,7 @@ import { useContext } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import imghero from '../../assets/Image.png?url';
-import smallImg from '../../assets/smallImg.png?url';
+import smallImg from '../../assets/small.png?url';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 
 
