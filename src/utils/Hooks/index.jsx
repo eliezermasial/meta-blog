@@ -12,15 +12,29 @@ export const useFetch = (url) => {
     const [data, setData] = useState();
 
     useEffect(() => {
+
         async function fetchdata() {
             try {
+
                 setLoading(true);
+                const cachedData = JSON.parse(localStorage.getItem(url));
+
+                if(cachedData) {
+
+                    setData(cachedData);
+                    setLoading(false);
+
+                    return;
+                }
+
                 await awaitingLOading(2000);
 
                 const response = await fetch(url);
                 const dataJson = await response.json();
 
                 setData(dataJson);
+
+                localStorage.setItem(url, JSON.stringify(dataJson));// Stocke les données dans le localStorage
                 
             } catch (error) {
                 setError(error);

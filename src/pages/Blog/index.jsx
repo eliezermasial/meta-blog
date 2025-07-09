@@ -27,7 +27,7 @@ function Blog () {
                 duration: 2,
                 ease: 'linear',
             }}
-            className={`w-44 h-44 border-[10px] 
+            className={`w-32 h-32 border-[10px] 
                 ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} 
                 border-t-transparent rounded-full`}
             />

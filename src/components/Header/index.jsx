@@ -23,13 +23,23 @@ function Header () {
                     <img src={(theme === 'dark' ? logoDark : logo)} width={150} height={18} alt="Logo" />
                 </a>
                 <ul className={`hidden md:flex flex-wrap justify-center items-center gap-8 ${theme === 'dark' ? 'text-[#FFFFFF]':'text-[#3B3C4A]'} font-['Work_Sans'] text-base font-normal leading-6 tracking-normal`}>
-                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className="  "> <NavLink to="/" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Home</NavLink> </motion.li>
-                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/blog">Blog</NavLink> </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+                        <NavLink to="/" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Home</NavLink>
+                    </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+                        <NavLink to="/blog" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Blog</NavLink>
+                    </motion.li>
                     {location.pathname.startsWith('/singlepost') && (
-                        <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/siglePost">Single Post</NavLink> </motion.li>
+                        <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+                            <NavLink to="/singlePost" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Single Post</NavLink>
+                        </motion.li>
                     )}
-                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/pages">Pages</NavLink> </motion.li>
-                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} className=" "> <NavLink to="/contact">Contact</NavLink> </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+                        <NavLink to="/pages" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Pages</NavLink>
+                    </motion.li>
+                    <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+                        <NavLink to="/contact" className={({ isActive }) => isActive ? "border border-[#4B6BFB] rounded-sm p-1" : ""}>Contact</NavLink>
+                    </motion.li>
                 </ul>
                 <div className="flex items-center gap-4 max-sm:hidden">
                     <div className="relative">
