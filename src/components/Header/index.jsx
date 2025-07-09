@@ -1,6 +1,6 @@
 import { useContext } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import logo from '../../assets/Logo1.svg';
 import { NavLink } from "react-router-dom";
 import logoDark from '../../assets/logoDark.png';
@@ -13,11 +13,21 @@ function Header () {
     const { toggleTheme, theme } = useContext(ThemeContext);
     const location = useLocation();
 
-    return (
+    const {scrollYProgress} = useScroll();
 
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 400,
+        damping: 30,
+        restDelta: 0.001,
+    });
+    
+    return (
         <motion.header initial={false} animate={{backgroundColor: theme === 'dark' ? '#242535' : '#FFFF',}} transition={{ type: 'spring', stiffness: 400, damping: 30,}}
             className={`fixed overflow-x-hidden z-10 w-full  shadow-md transition-all duration-200 `}
         >
+            <motion.div id="scroll-indicator" style={{scaleX: smoothProgress,transformOrigin: "left",}}
+                className="top-0 left-0 right-0 h-[8px] bg-[#4b6bfbc0] origin-left"
+            />
            <nav className="container mx-auto flex items-center justify-between gap-4 max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-6">
                 <a href="/">
                     <img src={(theme === 'dark' ? logoDark : logo)} width={150} height={18} alt="Logo" />

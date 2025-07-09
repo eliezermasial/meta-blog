@@ -2,7 +2,7 @@ import { useContext } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { NavLink } from "react-router-dom";
-import imgHeroBlog from "../../assets/Image.png";
+import imgHeroBlog from "../../assets/Image.png?url";
 import smallImg from "../../assets/SmallImg.png";
 import { ThemeContext } from "../../utils/Context/ThemeContext";
 
