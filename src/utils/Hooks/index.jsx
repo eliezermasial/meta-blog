@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import  awaitingLOading  from "../../lib/req";
 
 
+
+
 // Ce hook permet de récupérer des données depuis une URL donnée
 // Il gère les états de chargement, d'erreur, et stocke les données reçues
 // Il simule un délai de chargement de 2 secondes avant de faire la requête réelle
@@ -20,7 +22,6 @@ export const useFetch = (url) => {
                 const cachedData = JSON.parse(localStorage.getItem(url));
 
                 if(cachedData) {
-
                     setData(cachedData);
                     setLoading(false);
 
@@ -64,8 +65,8 @@ export const usePostsWithAuthor = (posts, users) => {
             const author = users.find(user => user.id === post.userId);
             return {
                 ...post,
-                authorName: author?.name || "Inconnu",
-                authorEmail: author?.email || "Inconnu"
+                authorName: author?.name || "unkown",
+                authorEmail: author?.email || "unkown"
             };
         });
     }, [posts, users]);
