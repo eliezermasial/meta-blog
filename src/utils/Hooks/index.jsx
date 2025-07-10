@@ -2,8 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import  awaitingLOading  from "../../lib/req";
 
 
-
-
 // Ce hook permet de récupérer des données depuis une URL donnée
 // Il gère les états de chargement, d'erreur, et stocke les données reçues
 // Il simule un délai de chargement de 2 secondes avant de faire la requête réelle
@@ -71,3 +69,22 @@ export const usePostsWithAuthor = (posts, users) => {
         });
     }, [posts, users]);
 };
+
+
+
+export const useMediaQuery = (query) => {
+
+    const [matches, setMatches] = useState(() => window.matchMedia(query).matches); // Initialise l'état matches avec la correspondance actuelle du query passé en paramètre
+    
+    useEffect(() => {
+        const mediaQueryList = window.matchMedia(query); // Crée un MediaQueryList pour le query passé en paramètre
+        const handleChange = (e) => {setMatches(e.matches);}; // Met à jour l'état matches lorsque la correspondance change
+
+        mediaQueryList.onchange = handleChange; // Ajoute un écouteur d'événement pour les changements de correspondance
+        return () => {
+            mediaQueryList.onchange = null; // Clean up the event listener
+        };
+    }, [query]);
+
+    return matches;
+}

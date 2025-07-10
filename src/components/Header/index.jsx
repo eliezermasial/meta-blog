@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import {useMediaQuery} from '../../utils/Hooks';
 import { NavLink } from "react-router-dom";
 import { ThemeContext }  from "../../utils/Context/ThemeContext";
 import { useLocation } from "react-router-dom";
@@ -11,13 +12,34 @@ function Header () {
     const { toggleTheme, theme } = useContext(ThemeContext);
     const location = useLocation();
 
-    const {scrollYProgress} = useScroll();
+    const [ btnMobile, setBtnMobile] = useState(false);
+    const isMediumScreen = useMediaQuery('(min-width: 768px)');
 
+    const {scrollYProgress} = useScroll();
     const smoothProgress = useSpring(scrollYProgress, {
         stiffness: 400,
         damping: 30,
         restDelta: 0.001,
     });
+
+    // Handle the scroll progress bar
+    useEffect(() => {
+        if (btnMobile) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, [btnMobile]);
+
+    useEffect(() => {
+        if (isMediumScreen) {
+            setBtnMobile(false);
+        }
+    }, [isMediumScreen]);
+    
     
     return (
         <motion.header initial={false} animate={{backgroundColor: theme === 'dark' ? '#242535' : '#FFFF',}} transition={{ type: 'spring', stiffness: 400, damping: 30,}}
@@ -62,7 +84,7 @@ function Header () {
                         </svg>
                     </div>
                     <motion.button onClick={()=> toggleTheme()} initial={false} animate={{backgroundColor: theme === 'dark' ? '#4B6BFB' : '#F4F4F5',}} transition={{ type: 'spring', stiffness: 400, damping: 20,}}
-                        className={`max-md:hidden items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
+                        className={`btn-theme max-md:hidden items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
                     >
                         <motion.div layout transition={{ type: "spring", stiffness: 200, damping: 30, }} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 bg-white h-4 rounded-full p-1">
@@ -73,14 +95,14 @@ function Header () {
                 </div>
 
                 <div className="max-md:flex hidden items-center gap-4 ">
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="border-[2px] bg-[#F4F4F5] border-[#3636389f] hover:border-[#3b83f6a8] p-1 rounded-md transition-colors">
+                    <motion.button onClick={() => setBtnMobile(!btnMobile)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn-mobile border-[2px] bg-[#F4F4F5] border-[#3636389f] hover:border-[#3b83f6a8] p-1 rounded-md transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#363638a4" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
                         </svg>
                     </motion.button>
 
                     <motion.button onClick={()=> toggleTheme()} initial={false} animate={{backgroundColor: theme === 'dark' ? '#4B6BFB' : '#F4F4F5',}} transition={{ type: 'spring', stiffness: 400, damping: 20,}}
-                        className={`items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
+                        className={`btn-theme items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
                     >
                         <motion.div layout transition={{ type: "spring", stiffness: 200, damping: 30, }} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 bg-white h-4 rounded-full p-1">
@@ -89,7 +111,32 @@ function Header () {
                         </motion.div>
                     </motion.button>
                 </div>
+                
             </nav>
+            <AnimatePresence>
+                {btnMobile && (
+                    <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} transition={{ duration: 1.1, ease: "easeInOut" }}
+                        className={`container fixed top-23 left-0 pt-4 right-0 ${theme === 'dark'? 'bg-[#242535fa]' : 'bg-white' } w-full h-full px-4 md:hidden z-20`}
+                    >
+                        <ul className="flex gap-4 p-5 flex-col space-y-2 text-white font-medium">
+                        {[
+                            { label: "Home", href: "/" },
+                            { label: "Blog", href: "/blog" },
+                            { label: "Page", href: "/page" },
+                            { label: "Contact", href: "/contact" },
+                        ].map(({ label, href }, i) => (
+                            <motion.li key={i} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                className=" bg-[#f4f4f5a4] rounded-sm shadow-sm w-full" style={{display: "block",transformOrigin: "center",willChange: "transform",}}
+                            >
+                                <a href={href} className={`block w-full px-4 py-2 transition-colors duration-200 font-bold text-black rounded-sm shadow shadow-[#a4accf]`}>
+                                    {label}
+                                </a>
+                            </motion.li>
+                        ))}
+                        </ul>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.header>
     )
 }
