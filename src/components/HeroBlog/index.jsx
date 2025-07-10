@@ -2,7 +2,6 @@ import { useContext } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { NavLink } from "react-router-dom";
-import imgHeroBlog from "../../assets/Image.png?url";
 import smallImg from "../../assets/small.png?url";
 import { ThemeContext } from "../../utils/Context/ThemeContext";
 
@@ -22,7 +21,7 @@ function HeroBlog () {
                 </ul>
             </div>
             <div>
-                <img src={imgHeroBlog} className="w-full h-[450px] object-cover rounded-md" alt="hero image"/>
+                <img src="/Image.png" loading="lazy" className="w-full h-[450px] object-cover rounded-md" alt="hero image"/>
             </div>
 
             <div className="absolute -bottom-1  left-1/2 md:left-[40%] text-[#FFFF] lg:left-[30%] xl:left-[25%] transform -translate-x-1/2 py-6 
