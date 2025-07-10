@@ -1,6 +1,4 @@
 import { useContext } from 'react';
-import smallImg from '../../assets/small.png?url';
-import imgPost from '../../assets/rectangle.png?url';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 
 
@@ -21,13 +19,13 @@ function Post ({data}) {
                         {part2}
                     </h2>
                     <div className="flex items-center text-[#97989F] gap-3 flex-wrap text-sm">
-                        <img src={smallImg} alt="auteur" className="w-8 h-8 rounded-full" />
+                        <img src="/assets/small.png" loading='lazy' alt="auteur" className="w-8 h-8 rounded-full" />
                         <span>Jason Francisco</span>
                         <span>August 20, 2022</span>
                     </div>
                 </div>
                 <div>
-                    <img src={imgPost} alt="post" className="w-full h-[240px] sm:h-[320px] md:h-[420px] lg:h-[460px] rounded-md object-cover"/>
+                    <img src="/assets/rectangle.png" loading='lazy' alt="post" className="w-full h-[240px] sm:h-[320px] md:h-[420px] lg:h-[460px] rounded-md object-cover"/>
                 </div>
                 <div className="space-y-6 text-base leading-relaxed">
                     <p className={`${theme === 'dark' ? 'text-white' : 'text-[#181A2A]'}`}>
@@ -66,7 +64,7 @@ function Post ({data}) {
                     <p className='text-[#181A2A] tex-[24px] leading-loose italic '>“ Traveling can expose you to new environments and potential health risks, so it's crucial to take precautions to stay safe and healthy. ”</p>
                 </div>
                 <div>
-                    <img src={imgPost} alt="post" className="w-full h-[240px] sm:h-[320px] md:h-[420px] lg:h-[460px] rounded-md object-cover"/>
+                    <img src="/assets/rectangle.png" loading='lazy' alt="post" className="w-full h-[240px] sm:h-[320px] md:h-[420px] lg:h-[460px] rounded-md object-cover"/>
                 </div>
                 <div className="space-y-6 text-base leading-relaxed">
                     <p className={`${theme === 'dark' ? 'text-white' : 'text-[#181A2A]'}`}>

@@ -2,7 +2,6 @@ import { useContext } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { NavLink } from "react-router-dom";
-import smallImg from "../../assets/small.png?url";
 import { ThemeContext } from "../../utils/Context/ThemeContext";
 
 
@@ -21,7 +20,7 @@ function HeroBlog () {
                 </ul>
             </div>
             <div>
-                <img src="/Image.png" loading="lazy" className="w-full h-[450px] object-cover rounded-md" alt="hero image"/>
+                <img src="/assets/Image.png" loading="lazy" className="w-full h-[450px] object-cover rounded-md" alt="hero image"/>
             </div>
 
             <div className="absolute -bottom-1  left-1/2 md:left-[40%] text-[#FFFF] lg:left-[30%] xl:left-[25%] transform -translate-x-1/2 py-6 
@@ -32,7 +31,7 @@ function HeroBlog () {
                 </button>
                 <p className="mb-4 font-['Work_Sans'] font-semibold text-base sm:text-lg md:text-xl">The Impact of Technology on the Workplace: How Technology is Changing</p>
                 <div className="flex items-center text-[#97989F] gap-2 flex-wrap">
-                    <img src={smallImg} alt="petit image" className="w-8 h-8 rounded-full" />
+                    <img src="/assets/small.png" loading="lazy" alt="petit image" className="w-8 h-8 rounded-full" />
                     <span className="text-sm font-['Work_Sans'] leading-5">Jason Francisco</span>
                     <span className="text-sm font-['Work_Sans'] leading-5">August 20, 2022</span>
                 </div>

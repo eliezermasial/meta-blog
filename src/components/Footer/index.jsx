@@ -2,8 +2,6 @@ import { useContext } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
-import logoDarkFooter from '../../assets/logoFooterDark.png';
-import logoLightFooter from '../../assets/Copyright Info.png';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 
 
@@ -78,7 +76,7 @@ function Footer () {
 
                 <div className="flex  justify-between items-center gap-4 text-sm">
                     <div>
-                        <img src={(theme === 'dark' ? logoDarkFooter : logoLightFooter)} alt="Footer logo" className="w-32 sm:w-40 md:w-52 lg:w-80" />
+                        <img src={(theme === 'dark' ? '/assets/logoFooterDark.png' : '/assets/Copyright Info.png')} loading='lazy' alt="Footer logo" className="w-32 sm:w-40 md:w-52 lg:w-80" />
                     </div>
                     <ul className={`flex max-md:gap-2 gap-4 ${theme === 'dark' ? 'text-[#97989F]' : 'text-[#3B3C4A]'}`}>
                         <li><a href="#">Terms of Use</a></li>

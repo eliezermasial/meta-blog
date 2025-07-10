@@ -1,8 +1,6 @@
 import { useContext } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import smallImg from '../../assets/small.png?url';
-import imgTry from '../../assets/rectangle.png?url';
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 
@@ -36,7 +34,7 @@ function Lastpost ({data}) {
                                     min-h-[430px]`}
                             >
                                 <div>
-                                    <img src={imgTry} className="w-full mb-3" alt="try image" />
+                                    <img src="assets/rectangle.png" loading='lazy' className="w-full mb-3" alt="try image" />
                                     <button className="mb-2 text-sm font-['Work_Sans'] text-[#4B6BFB] font-medium bg-[#4B6BFB0D] px-3 py-1 rounded">
                                         Technologie
                                     </button>
@@ -45,7 +43,7 @@ function Lastpost ({data}) {
                                     </p>
                                 </div>
                                 <div className="flex items-center text-[#97989F] gap-2 mt-auto">
-                                    <img src={smallImg} alt="petit image" className="w-8 h-8 rounded-full" />
+                                    <img src="/assets/small.png" loading='lazy' alt="petit image" className="w-8 h-8 rounded-full" />
                                     <span className="text-sm font-['Work_Sans'] leading-5">{post.authorName || "Auteur inconnu"}</span>
                                     <span className="text-sm font-['Work_Sans'] leading-5">August 20, 2022</span>
                                 </div>

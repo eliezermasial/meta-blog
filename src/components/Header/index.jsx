@@ -1,9 +1,7 @@
 import { useContext } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useSpring } from 'framer-motion';
-import logo from '../../assets/Logo1.svg';
 import { NavLink } from "react-router-dom";
-import logoDark from '../../assets/logoDark.png';
 import { ThemeContext }  from "../../utils/Context/ThemeContext";
 import { useLocation } from "react-router-dom";
 
@@ -30,7 +28,7 @@ function Header () {
             />
            <nav className="container mx-auto flex items-center justify-between gap-4 max-md:px-4 md:px-4 lg:px-4 xl:px-4 py-6">
                 <a href="/">
-                    <img src={(theme === 'dark' ? logoDark : logo)} width={150} height={18} alt="Logo" />
+                    <img src={(theme === 'dark' ? '/assets/logoDark.png' : '/assets/Logo1.svg')} width={150} height={18} alt="Logo" />
                 </a>
                 <ul className={`hidden md:flex flex-wrap justify-center items-center gap-8 ${theme === 'dark' ? 'text-[#FFFFFF]':'text-[#3B3C4A]'} font-['Work_Sans'] text-base font-normal leading-6 tracking-normal`}>
                     <motion.li whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
