@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import  awaitingLOading  from "../../lib/req";
+
 
 
 // Ce hook permet de récupérer des données depuis une URL donnée
@@ -49,6 +50,58 @@ export const useFetch = (url) => {
     return{loading, error, data};
 }
 
+/**
+ * useLoadMore
+ * @param {Object} params
+ * @param {Array|undefined} params.pageData - données brutes de la page courante (from useFetch)
+ * @param {Array|undefined} params.postsWithAuthor - données enrichies (pageData transformé)
+ * @param {boolean} params.loading - loading flag from useFetch
+ * @param {number} params.limit - limite par page (ex: 6)
+ * @param {Function} params.setPage - setter de la page (from parent useState)
+ *
+ * @returns {Object} { posts, initialLoading, hasMore, handleLoadMore, resetPosts }
+ */
+export const useLoadMore = ({ pageData, postsWithAuthor, loading, limit, setPage }) => {
+    const [posts, setPosts] = useState([]);
+    const [initialLoading, setInitialLoading] = useState(false);
+
+    // Met à jour les posts lorsque pageData ou postsWithAuthor changent.
+    useEffect(() => {
+        if(Array.isArray(pageData) && pageData.length > 0) {
+            setPosts((prev) => {
+                const existingIds = new Set(prev.map(p => p.id));
+                const newPosts = Array.isArray(postsWithAuthor) ?
+                postsWithAuthor.filter(p => !existingIds.has(p.id)) : [];
+
+                return [...prev, ...newPosts];
+            })
+
+            if(!initialLoading) setInitialLoading(true);
+
+        } else if (!pageData && !loading && !initialLoading) {
+            setInitialLoading(true);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pageData, postsWithAuthor, loading]);
+
+    const hasMore = Array.isArray(pageData)  ? pageData.length === limit : false ;
+    
+    // Mémorise la fonction handleLoadMore pour éviter les recréations inutiles
+    const handleLoadMore = useCallback(() => {
+        if(hasMore && !loading) {
+            setPage((prev) => prev + 1);
+        }
+    }, [hasMore, loading, setPage]);
+
+    // Fonction pour réinitialiser les posts (utile si on veut recharger depuis le début)
+    const resetPosts = useCallback(() => {
+        setPosts([]);
+        setInitialLoading(false);
+    }, []);
+
+    return { posts, initialLoading, hasMore, handleLoadMore, resetPosts };
+}
 
 // Ce hook transforme un tableau de posts en y ajoutant les informations de l'auteur
 // Pour chaque post, il cherche dans la liste des utilisateurs l'auteur correspondant via userId
@@ -70,11 +123,15 @@ export const usePostsWithAuthor = (posts, users) => {
     }, [posts, users]);
 };
 
-
-
+/**
+ * useMediaQuery
+ * @param {string} query - media query string (e.g., '(max-width: 600px)')
+ * @returns {boolean} - true if the media query matches, false otherwise
+ */
 export const useMediaQuery = (query) => {
-
-    const [matches, setMatches] = useState(() => window.matchMedia(query).matches); // Initialise l'état matches avec la correspondance actuelle du query passé en paramètre
+    
+    // Initialise l'état matches avec la correspondance actuelle du query passé en paramètre
+    const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
     
     useEffect(() => {
         const mediaQueryList = window.matchMedia(query); // Crée un MediaQueryList pour le query passé en paramètre

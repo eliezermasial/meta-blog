@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion , AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../utils/Context/ThemeContext';
 
@@ -18,6 +18,7 @@ function Lastpost ({data}) {
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <AnimatePresence>
                 {Array.isArray(data) && data.map((post, index) => (
                 <div key={index} className="p-2">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -52,7 +53,7 @@ function Lastpost ({data}) {
                     </motion.div>
                 </div>
                 ))}
-
+            </AnimatePresence>
             </div>
         </section>
 

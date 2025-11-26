@@ -1,7 +1,7 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import {useFetch, usePostsWithAuthor} from '../../utils/Hooks';
+import {useFetch, usePostsWithAuthor, useLoadMore} from '../../utils/Hooks';
 import HeroBlog from "../../components/HeroBlog";
 import Lastpost from "../../components/LastPost";
 import { ThemeContext } from '../../utils/Context/ThemeContext';
@@ -10,34 +10,64 @@ import { ThemeContext } from '../../utils/Context/ThemeContext';
 function Blog () {
     
     const { theme } = useContext(ThemeContext);
-    const apiUrl = `${import.meta.env.VITE_API_URL}/posts`;
+
+    const limit = 6;
+    const [page,setPage] = useState(1);
+
+    const apiUrl = `${import.meta.env.VITE_API_URL}/posts?_limit=${limit}&_page=${page}`;
     const apiUrlUsers = `${import.meta.env.VITE_API_URL}/users`;
 
     const {data:users} = useFetch(apiUrlUsers);
-    const {data, loading, error} = useFetch(apiUrl);
-    const postsWithAuthor = usePostsWithAuthor(data, users);
+    const {data: pageData, loading, error} = useFetch(apiUrl);
+    const postsWithAuthor = usePostsWithAuthor(pageData, users);
+
+    const {posts, initialLoading, hasMore, handleLoadMore,} = useLoadMore({
+        pageData,
+        postsWithAuthor,
+        loading,
+        limit,
+        setPage
+    });
 
     return (
         <div>
-        {loading && <div className="flex items-center justify-center h-screen">
-            <motion.div
-            animate={{ rotate: 360 }}
-            transition={{
-                repeat: Infinity,
-                duration: 2,
-                ease: 'linear',
-            }}
-            className={`w-32 h-32 border-[10px] 
-                ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} 
-                border-t-transparent rounded-full`}
-            />
+        {!initialLoading && loading  &&
+            <div className="flex items-center justify-center h-screen">
+                <motion.div
+                animate={{ rotate: 360 }}
+                transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: 'linear',
+                }}
+                className={`w-32 h-32 border-[10px] 
+                    ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} 
+                    border-t-transparent rounded-full`}
+                />
             </div>
         }
-        {!loading && !error && (
+        {initialLoading && !error && (
             <>
                 <HeroBlog />
-                <Lastpost data={postsWithAuthor} />
+                <Lastpost data={posts} />
+                <div className="flex justify-center my-8">
+                    {hasMore ? (
+                        <button onClick={handleLoadMore} disabled={loading}
+                            className="px-4 py-2 bg-[#4B6BFB] text-white rounded flex items-center justify-center gap-2 hover:bg-blue-700
+                            transition disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                            {loading ? <span className="loader"></span> : 'load more'}
+                        </button>
+                    ) : (
+                        <p>No more posts to load.</p>
+                    )}
+                </div>
             </>
+        )}
+        {error && (
+            <div className="text-center text-red-500 mt-8">
+                <p>Une erreur est survenue lors du chargement des articles.</p>
+            </div>
         )}
         </div>
     )
