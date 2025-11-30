@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useContext } from "react";
 import  awaitingLOading  from "../../lib/req";
+import { SearchContext } from "../Context/ThemeContext";
 
 
 
@@ -12,7 +13,14 @@ export const useFetch = (url) => {
     const [error, setError] =useState(null);
     const [data, setData] = useState();
 
+
     useEffect(() => {
+
+        if(! url) {
+            setLoading(false);
+            setData(null);
+            return;
+        }
 
         async function fetchdata() {
             try {
@@ -144,4 +152,17 @@ export const useMediaQuery = (query) => {
     }, [query]);
 
     return matches;
+}
+
+/**
+ * useSearch
+ * Custom hook to access the SearchContext
+ * @returns {Object} Search context value
+ */
+export const useSearch = () => {
+  const ctx = useContext(SearchContext);
+  if (!ctx) {
+    throw new Error("useSearch must be used within a SearchProvider");
+  }
+  return ctx;
 }

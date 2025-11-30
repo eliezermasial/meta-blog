@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import {useMediaQuery} from '../../utils/Hooks';
 import { NavLink } from "react-router-dom";
+import { useSearch } from '../../utils/Hooks';
 import { ThemeContext }  from "../../utils/Context/ThemeContext";
 import { useLocation } from "react-router-dom";
 
@@ -21,6 +22,37 @@ function Header () {
         damping: 30,
         restDelta: 0.001,
     });
+
+    const { query, setQuery, setResults, setLoading, setError } = useSearch();
+
+
+    const handleChange = (e) => setQuery(e.target.value);
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if(!query.trim() && !query) return;
+
+        setLoading (true);
+        setError (null);
+
+        try {
+            const URL = `${import.meta.env.VITE_API_URL}/posts?title_like=${encodeURIComponent(query)}`;
+            const response = await fetch(URL);
+
+            if(!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const json = await response.json();
+            setResults(json);
+
+        } catch (error) {
+            setError(error.message || "Une erreur est survenue");
+            setResults([]);
+
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Handle the scroll progress bar
     useEffect(() => {
@@ -72,19 +104,24 @@ function Header () {
                     </motion.li>
                 </ul>
                 <div className="flex items-center gap-4 max-sm:hidden">
-                    <div className="relative">
-                        <input type="text" placeholder="Search"
-                            className={`outline-none w-[166px] h-[36px] ${theme === 'dark' ? 'bg-[#24253570] border border-[#f4f4f579]' : 'bg-[#F4F4F5] border border-[#24253570]] '} px-3 pr-8 rounded-md text-sm`}
+                    <form className="relative" onSubmit={handleSubmit}>
+
+                        <input value={query} onChange={handleChange} placeholder="Search a post"
+                            className= {`w-[166px] h-[36px] px-3 pr-8 rounded-md text-sm outline-none border
+                                ${theme === 'dark' ? 'bg-[#24253570] border-[#f4f4f579]' : 'bg-[#f4f4f5] caret-[#24253570] border-[#24253570]'}
+                            `}
                         />
+                        
                         <svg className="absolute right-3 top-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" >
                             <path d="M6.90906 2C5.93814 2 4.98903 2.28791 4.18174 2.82733C3.37444 3.36674 2.74524 4.13343 2.37368 5.03045C2.00213 5.92746 1.90491 6.91451 2.09433 7.86677C2.28375 8.81904 2.75129 9.69375 3.43783 10.3803C4.12438 11.0668 4.99909 11.5344 5.95135 11.7238C6.90362 11.9132 7.89067 11.816 8.78768 11.4444C9.6847 11.0729 10.4514 10.4437 10.9908 9.63639C11.5302 8.8291 11.8181 7.87998 11.8181 6.90906C11.818 5.60712 11.3008 4.35853 10.3802 3.43792C9.45959 2.51731 8.211 2.00008 6.90906 2Z"
                                 stroke="#52525B" strokeWidth="1.5"
                             />
                             <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
-                    </div>
+                    </form>
+                    {/* Theme toggle button */}
                     <motion.button onClick={()=> toggleTheme()} initial={false} animate={{backgroundColor: theme === 'dark' ? '#4B6BFB' : '#F4F4F5',}} transition={{ type: 'spring', stiffness: 400, damping: 20,}}
-                        className={`btn-theme max-md:hidden items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
+                        className={`btn-theme max-md:hidden items-center transition-all duration-300 px-1 w-10 flex rounded-full font-semibold outline-none ${theme === 'dark' ? 'justify-end ' : 'bg-[#F4F4F5] justify-start'}`}
                     >
                         <motion.div layout transition={{ type: "spring", stiffness: 200, damping: 30, }} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 bg-white h-4 rounded-full p-1">
@@ -111,7 +148,7 @@ function Header () {
                         </motion.div>
                     </motion.button>
                 </div>
-                
+
             </nav>
             <AnimatePresence>
                 {btnMobile && (
@@ -133,6 +170,21 @@ function Header () {
                                 </a>
                             </motion.li>
                         ))}
+                            <form className="relative " onSubmit={handleSubmit}>
+
+                            <input value={query} onChange={handleChange} placeholder="Search a post"
+                                className= {`w-full h-[36px] px-3 pr-8 rounded-md text-sm outline-none border
+                                    ${theme === 'dark' ? 'bg-[#24253570] border-[#f4f4f579]' : 'bg-[#f4f4f5] caret-[#24253570] border-[#24253570]'}
+                                `}
+                            />
+                            
+                            <svg className="absolute right-3 top-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" >
+                                <path d="M6.90906 2C5.93814 2 4.98903 2.28791 4.18174 2.82733C3.37444 3.36674 2.74524 4.13343 2.37368 5.03045C2.00213 5.92746 1.90491 6.91451 2.09433 7.86677C2.28375 8.81904 2.75129 9.69375 3.43783 10.3803C4.12438 11.0668 4.99909 11.5344 5.95135 11.7238C6.90362 11.9132 7.89067 11.816 8.78768 11.4444C9.6847 11.0729 10.4514 10.4437 10.9908 9.63639C11.5302 8.8291 11.8181 7.87998 11.8181 6.90906C11.818 5.60712 11.3008 4.35853 10.3802 3.43792C9.45959 2.51731 8.211 2.00008 6.90906 2Z"
+                                    stroke="#52525B" strokeWidth="1.5"
+                                />
+                                <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
+                            </svg>
+                        </form>
                         </ul>
                     </motion.div>
                 )}

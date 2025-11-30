@@ -56,7 +56,6 @@ function Lastpost ({data}) {
             </AnimatePresence>
             </div>
         </section>
-
     )
 }
 
