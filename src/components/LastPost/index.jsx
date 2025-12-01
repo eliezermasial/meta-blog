@@ -30,9 +30,8 @@ function Lastpost ({data}) {
                                     backgroundColor: theme === 'dark' ? '#181A2A' : '#FFFF',
                                 }}
                             
-                                className={`flex flex-col justify-between h-full p-4 transition-all duration-200 border rounded-md 
-                                    ${theme === 'dark' ? 'border-[#242535]' : 'border-[#E8E8EA]'} 
-                                    min-h-[430px]`}
+                                className={`flex flex-col justify-between h-full min-h-[430px] p-4 transition-all duration-200 border rounded-md 
+                                    ${theme === 'dark' ? 'border-[#242535]' : 'border-[#E8E8EA]'}`}
                             >
                                 <div>
                                     <img src="assets/rectangle.png" loading='lazy' className="w-full mb-3" alt="try image" />

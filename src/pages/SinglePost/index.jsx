@@ -20,11 +20,11 @@ function SinglePost () {
     return (
         <div>
             {loading &&
-                <div className="flex items-center justify-center h-screen">
-                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: 'linear',}}
-                        className={`w-32 h-32 border-[10px] border-t-transparent rounded-full ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} `}
-                    />
-                </div>
+            <div className="flex items-center justify-center h-screen">
+                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: 'linear',}}
+                    className={`w-32 h-32 border-[10px] border-t-transparent rounded-full ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} `}
+                />
+            </div>
             }
             {!loading && !error && (
                 <>

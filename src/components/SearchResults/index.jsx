@@ -14,7 +14,7 @@ function SearchResults({ results, query, onClear }) {
   return (
     <section className=" mt-20 py-4">
       <div className="flex items-center justify-between dark:bg-[#1f1f2a] rounded shadow mt-6 mb-10 p-4">
-        <h2 className={`font-['Work_Sans'] font-bold text-2xl dark:text-white text-gray-800 leading-6`}>
+        <h2 className={`font-['Work_Sans'] font-bold text-lg md:text-2xl dark:text-white text-gray-800 leading-6`}>
           <span>{results.length}</span> Résultats pour « {query} »
         </h2>
         {typeof onClear === "function" && (
@@ -33,18 +33,21 @@ function SearchResults({ results, query, onClear }) {
           <p>Aucun résultat trouvé pour « {query} »</p>
         </div>
         ) : (
-        <div className="flex flex-wrap p-2 gap-6 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-wrap p-2 gap-6 mt-10">
           {results.map((post, index) => (
-            <div key={index} className="p-4 dark:bg-[#1f1f2a] bg-white rounded shadow w-full flex flex-col md:flex-row md:justify-between gap-6">
-                <div className="flex gap-4 md:gap-6">
-                  <img src="assets/rectangle.png" loading="lazy" className="w-32 h-auto md:w-52 rounded" alt="try image"/>
+            <div key={index} className="p-4 h-full max-md:min-h-[430px] dark:bg-[#1f1f2a] border border-[#E8E8EA]
+             dark:border-[#242535] bg-white rounded shadow md:w-full flex flex-col justify-between md:flex-row gap-6"
+            >
+                <div className="md:flex md:gap-6">
+                  <img src="assets/rectangle.png" loading="lazy" className="w-full md:w-52 max-md:mb-6 rounded" alt="try image"/>
                   <Link to={`/singlepost/${index}`} aria-label={`Voir le post ${post.title}`}>
-                    <p className={`font-['Work_Sans'] md:w-80 pt-6 font-semibold text-lg md:text-xl line-clamp-2 ${theme === 'dark' ? 'text-white' : 'text-[#181A2A]'}`}>
+                    <p className={`font-['Work_Sans'] md:w-80 pt-6 font-semibold text-lg
+                      md:text-xl line-clamp-2 ${theme === 'dark' ? 'text-white' : 'text-[#181A2A]'}`}>
                       {post.title}
                     </p>
                   </Link>
                 </div>
-                <div className="flex items-center text-[#97989F] gap-3 mt-4 md:mt-0 md:pr-2">
+                <div className="flex items-center text-[#8588a3] gap-3 max-md:mt-auto md:px-3">
                   <img src="/assets/small.png" loading="lazy" alt="petit image" className="w-8 h-8 rounded-full"/>
                   <span className="text-sm font-['Work_Sans']">August 20, 2022</span>
                 </div>
