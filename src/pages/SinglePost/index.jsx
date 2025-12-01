@@ -16,22 +16,14 @@ function SinglePost () {
     
     const userApi = data?.userId? `${import.meta.env.VITE_API_URL}/users/${data.userId}`: null;
     const { data: userData } = useFetch(userApi);
-    console.log("autheur",userData);
     
     return (
         <div>
-            {loading && <div class="flex items-center justify-center h-screen">
-                <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                    repeat: Infinity,
-                    duration: 2,
-                    ease: 'linear',
-                    }}
-                    className={`w-32 h-32 border-[10px] 
-                    ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} 
-                     border-t-transparent rounded-full`}
-                />
+            {loading &&
+                <div className="flex items-center justify-center h-screen">
+                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: 'linear',}}
+                        className={`w-32 h-32 border-[10px] border-t-transparent rounded-full ${theme === 'dark' ? 'border-blue-600' : 'border-[#181A2A]'} `}
+                    />
                 </div>
             }
             {!loading && !error && (

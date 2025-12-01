@@ -108,7 +108,7 @@ function Header () {
 
                         <input value={query} onChange={handleChange} placeholder="Search a post"
                             className= {`w-[166px] h-[36px] px-3 pr-8 rounded-md text-sm outline-none border
-                                ${theme === 'dark' ? 'bg-[#24253570] border-[#f4f4f579]' : 'bg-[#f4f4f5] caret-[#24253570] border-[#24253570]'}
+                                ${theme === 'dark' ? 'bg-[#24253570] border-[#f4f4f579]' : 'bg-[#f4f4f5] caret-[#24253570] text-[#24253570] border-[#24253570]'}
                             `}
                         />
                         
@@ -148,43 +148,40 @@ function Header () {
                         </motion.div>
                     </motion.button>
                 </div>
-
             </nav>
             <AnimatePresence>
                 {btnMobile && (
                     <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} transition={{ duration: 1.1, ease: "easeInOut" }}
-                        className={`container fixed top-23 left-0 pt-4 right-0 ${theme === 'dark'? 'bg-[#242535fa]' : 'bg-white' } w-full h-full px-4 md:hidden z-20`}
+                        className={`container fixed top-23 left-0 pt-4 right-0 ${theme === 'dark'? 'bg-[#242535fa]/95' : 'bg-white/95' } w-full h-full border-b shadow-sm rounded-sm px-4 md:hidden z-20`}
                     >
                         <ul className="flex gap-4 p-5 flex-col space-y-2 text-white font-medium">
-                        {[
-                            { label: "Home", href: "/" },
-                            { label: "Blog", href: "/blog" },
-                            { label: "Page", href: "/page" },
-                            { label: "Contact", href: "/contact" },
-                        ].map(({ label, href }, i) => (
-                            <motion.li key={i} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                                className=" bg-[#f4f4f5a4] rounded-sm shadow-sm w-full" style={{display: "block",transformOrigin: "center",willChange: "transform",}}
-                            >
-                                <a href={href} className={`block w-full px-4 py-2 transition-colors duration-200 font-bold text-black rounded-sm shadow shadow-[#a4accf]`}>
-                                    {label}
-                                </a>
-                            </motion.li>
-                        ))}
+                            {[
+                                { label: "Home", href: "/" },
+                                { label: "Blog", href: "/blog" },
+                                { label: "Page", href: "/page" },
+                                { label: "Contact", href: "/contact" },
+                            ].map(({ label, href }, i) => (
+                                <motion.li key={i} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                    className=" bg-[#f4f4f5a4] rounded-sm shadow-sm w-full" style={{display: "block",transformOrigin: "center",willChange: "transform",}}
+                                >
+                                    <a href={href} className={`block w-full px-4 py-2 transition-colors duration-200 font-bold text-black rounded-sm shadow shadow-[#a4accf]`}>
+                                        {label}
+                                    </a>
+                                </motion.li>
+                            ))}
                             <form className="relative " onSubmit={handleSubmit}>
-
-                            <input value={query} onChange={handleChange} placeholder="Search a post"
-                                className= {`w-full h-[36px] px-3 pr-8 rounded-md text-sm outline-none border
-                                    ${theme === 'dark' ? 'bg-[#24253570] border-[#f4f4f579]' : 'bg-[#f4f4f5] caret-[#24253570] border-[#24253570]'}
-                                `}
-                            />
-                            
-                            <svg className="absolute right-3 top-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" >
-                                <path d="M6.90906 2C5.93814 2 4.98903 2.28791 4.18174 2.82733C3.37444 3.36674 2.74524 4.13343 2.37368 5.03045C2.00213 5.92746 1.90491 6.91451 2.09433 7.86677C2.28375 8.81904 2.75129 9.69375 3.43783 10.3803C4.12438 11.0668 4.99909 11.5344 5.95135 11.7238C6.90362 11.9132 7.89067 11.816 8.78768 11.4444C9.6847 11.0729 10.4514 10.4437 10.9908 9.63639C11.5302 8.8291 11.8181 7.87998 11.8181 6.90906C11.818 5.60712 11.3008 4.35853 10.3802 3.43792C9.45959 2.51731 8.211 2.00008 6.90906 2Z"
-                                    stroke="#52525B" strokeWidth="1.5"
+                                <input value={query} onChange={handleChange} placeholder="Search a post" enterkeyhint="search"
+                                    className= {`w-full h-[36px] px-3 pr-8 rounded-md text-sm outline-none border
+                                        ${theme === 'dark' ? 'bg-[#24253570] border-[#f4f4f579]' : 'bg-[#f4f4f5] caret-[#24253570] border-[#24253570]'}
+                                    `}
                                 />
-                                <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
-                            </svg>
-                        </form>
+                                <svg className="absolute right-3 top-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" >
+                                    <path d="M6.90906 2C5.93814 2 4.98903 2.28791 4.18174 2.82733C3.37444 3.36674 2.74524 4.13343 2.37368 5.03045C2.00213 5.92746 1.90491 6.91451 2.09433 7.86677C2.28375 8.81904 2.75129 9.69375 3.43783 10.3803C4.12438 11.0668 4.99909 11.5344 5.95135 11.7238C6.90362 11.9132 7.89067 11.816 8.78768 11.4444C9.6847 11.0729 10.4514 10.4437 10.9908 9.63639C11.5302 8.8291 11.8181 7.87998 11.8181 6.90906C11.818 5.60712 11.3008 4.35853 10.3802 3.43792C9.45959 2.51731 8.211 2.00008 6.90906 2Z"
+                                        stroke="#52525B" strokeWidth="1.5"
+                                    />
+                                    <path d="M10.5718 10.5716L14.0002 14" stroke="#52525B" strokeWidth="1.5" strokeLinecap="round" />
+                                </svg>
+                            </form>
                         </ul>
                     </motion.div>
                 )}
